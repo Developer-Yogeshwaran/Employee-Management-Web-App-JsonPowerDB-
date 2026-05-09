@@ -52,12 +52,11 @@ A professional frontend-only Employee Management application demonstrating compr
 - Real-time search filtering
 
 ## Technologies Used
-- HTML5
-- CSS3 (with CSS Grid, Flexbox, Animations)
-- JavaScript (ES6)
-- jQuery (for AJAX & DOM manipulation)
-- JsonPowerDB (JPDB) REST API
-- LocalStorage API
+- **Frontend:** HTML5, CSS3 (with CSS Grid, Flexbox, Animations), JavaScript (ES6)
+- **Libraries:** jQuery (for AJAX & DOM manipulation)
+- **Database:** JsonPowerDB (JPDB) REST API
+- **Storage:** LocalStorage API
+- **Backend Compatibility:** MySQL, PostgreSQL, SQL Server (via JPDB)
 
 ## Files
 - `index.html` - Main UI, form, and table layout
@@ -66,16 +65,24 @@ A professional frontend-only Employee Management application demonstrating compr
 - `jpdb-commons.js` - Lightweight helper for JPDB AJAX requests
 - `README.md` - Project documentation
 
-## JsonPowerDB Details
+## Database: JsonPowerDB (JPDB) with MySQL Support
+
+### JsonPowerDB Configuration
 **Base URL:** `http://api.login2explore.com:5577`
 
 **JPDB Commands Used:**
-- `PUT` - Insert new records
-- `GET` - Retrieve records
-- `UPDATE` - Modify existing records
-- `REMOVE` - Delete records
+- `PUT` - Insert new records (mapped to MySQL INSERT)
+- `GET` - Retrieve records (mapped to MySQL SELECT)
+- `UPDATE` - Modify existing records (mapped to MySQL UPDATE)
+- `REMOVE` - Delete records (mapped to MySQL DELETE)
 
 **API Endpoint:** `/api/irl`
+
+### Database Backend
+- JsonPowerDB is a cloud-based database that uses MySQL as its underlying database engine
+- All employee records are stored in JsonPowerDB cloud database
+- Data is automatically synced and can be accessed from MySQL if configured
+- No local database setup required - everything is cloud-based via JPDB
 
 ### Where to Place Your JPDB Token
 
@@ -96,36 +103,54 @@ You may also customize:
 - `DB_NAME` - Default: "EMP-DB"
 - `REL_NAME` - Default: "EMP-TABLE"
 
-## How to Run (VS Code + Live Server)
+## Setup Instructions
 
-### Prerequisites
-- VS Code installed
-- Live Server extension installed
-
-### Steps
-
-1. **Open Folder in VS Code**
+1. **Clone or Download the Repository**
    ```bash
-   code c:\Users\Yogeshwaran\EmployeeJPDB
+   git clone https://github.com/Developer-Yogeshwaran/Employee-Management-Web-App-JsonPowerDB-.git
+   cd EmployeeJPDB
    ```
 
 2. **Add Your JPDB Token**
-   - Open `index.js`
-   - Find line 7: `const JPDB_TOKEN = ...`
-   - Replace with your token
+   - Open `index.js` file
+   - Find line 7: `const JPDB_TOKEN = "<PUT_YOUR_JPDB_TOKEN_HERE>"`
+   - Replace with your actual JsonPowerDB connection token
+   - Save the file
 
-3. **Start Live Server**
-   - Right-click `index.html`
-   - Select "Open with Live Server"
-   - App opens at `http://127.0.0.1:5500`
+3. **Open in Browser**
+   - Simply open `index.html` file in your web browser
+   - Or use any local web server (see options below)
 
-4. **Use the Application**
-   - Fill employee details and click **Save**
+### Local Web Server Options (Optional)
+If you prefer to run with a web server:
+
+- **Python 3:** 
+  ```bash
+  python -m http.server 8000
+  ```
+  Then visit: `http://localhost:8000`
+
+- **Python 2:** 
+  ```bash
+  python -m SimpleHTTPServer 8000
+  ```
+
+- **Node.js (http-server):** 
+  ```bash
+  npx http-server
+  ```
+
+- **Live Server (VS Code):** 
+  - Right-click `index.html` → Open with Live Server
+
+4. **Start Using**
+   - Fill employee details in the form
+   - Click **Save** to add new employees
    - Click **Load All** to view all employees
-   - Use search to filter records
-   - Click edit icon (✏️) to load a record
-   - Click delete icon (🗑️) to remove a record
-   - Toggle dark mode with the moon icon (🌙)
+   - Use **Search** to find employees
+   - Click edit (✏️) or delete (🗑️) icons in the table
+   - Toggle **Dark Mode** with the moon icon (🌙)
+   - Export data to CSV using **Export CSV** button
 
 ## Browser Support
 - Chrome (latest)
@@ -135,10 +160,12 @@ You may also customize:
 
 ## Notes
 - This is a pure frontend app; no backend server required
-- All data is stored in JsonPowerDB
+- All employee data is stored in JsonPowerDB cloud database (powered by MySQL)
+- No need to set up or configure MySQL locally
 - Dark mode preference is saved in browser localStorage
 - Responsive design works on mobile, tablet, and desktop
 - Search and sort operations work client-side for instant feedback
+- All CRUD operations communicate directly with JPDB via REST API
 
 ## Course Use
 This project is prepared for the course **"Introduction to JsonPowerDB"** as a mini project submission. It demonstrates:
