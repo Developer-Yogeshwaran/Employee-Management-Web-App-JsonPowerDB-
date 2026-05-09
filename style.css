@@ -1,0 +1,107 @@
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --accent:#2b78e4;
+  --accent-light:#e8f1ff;
+  --danger:#e44b3a;
+  --muted:#6b7280;
+  --border:#e6e9ef;
+  --success:#10b981;
+  --warning:#f59e0b;
+  --text-primary:#0b1220;
+  --secondary:#8b5cf6;
+}
+
+/* Dark mode */
+body.dark-mode{
+  --bg:#1a1e2e;
+  --card:#252b3a;
+  --text-primary:#e4e9f7;
+  --border:#3a4052;
+  --accent-light:#1e3a5f;
+}
+
+*{box-sizing:border-box;font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text-primary);transition:background 0.3s,color 0.3s}
+
+.header{background:linear-gradient(135deg, var(--accent) 0%, #1e5fbb 100%);padding:20px;box-shadow:0 4px 12px rgba(43,120,228,0.15);position:sticky;top:0;z-index:100}
+.header-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.header h1{margin:0;color:#fff;font-size:28px;display:flex;align-items:center;gap:10px}
+.theme-toggle{background:rgba(255,255,255,0.2);border:none;color:#fff;padding:8px 12px;border-radius:6px;cursor:pointer;font-size:18px;transition:0.2s}
+.theme-toggle:hover{background:rgba(255,255,255,0.3);transform:scale(1.1)}
+
+.container{max-width:1200px;margin:30px auto;padding:0 16px}
+
+/* Dashboard Stats */
+.dashboard{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin-bottom:30px}
+.stat-card{background:linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);padding:20px;border-radius:10px;color:#fff;display:flex;gap:16px;align-items:center;box-shadow:0 4px 12px rgba(43,120,228,0.2);transition:transform 0.3s}
+.stat-card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(43,120,228,0.3)}
+.stat-icon{font-size:32px}
+.stat-info h3{margin:0;font-size:24px}
+.stat-info p{margin:4px 0 0 0;font-size:13px;opacity:0.9}
+
+.card{background:var(--card);padding:24px;border-radius:10px;box-shadow:0 4px 12px rgba(11,18,32,0.08);margin-bottom:24px;transition:box-shadow 0.3s}
+.card:hover{box-shadow:0 6px 20px rgba(43,120,228,0.12)}
+.card h2{margin-top:0;margin-bottom:18px;font-size:18px;color:var(--text-primary);display:flex;align-items:center;gap:8px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row{display:flex;flex-direction:column;margin-bottom:14px}
+label{font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+input[type=text],input[type=email],select{padding:12px;border:1px solid var(--border);border-radius:6px;font-size:14px;background:var(--card);color:var(--text-primary);transition:border-color 0.2s,box-shadow 0.2s}
+input[type=text]:focus,input[type=email]:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:12px;border-top:1px solid var(--border)}
+.btn{padding:11px 16px;border-radius:6px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:14px;font-weight:500;transition:all 0.2s;color:var(--text-primary)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.btn.primary{background:var(--accent);color:#fff;border:none}
+.btn.primary:hover{background:#1e5fbb;box-shadow:0 4px 12px rgba(43,120,228,0.3)}
+.btn.secondary{background:var(--secondary);color:#fff;border:none}
+.btn.secondary:hover{background:#7c3aed;box-shadow:0 4px 12px rgba(139,92,246,0.3)}
+.btn.danger{background:var(--danger);color:#fff;border:none}
+.btn.danger:hover{background:#d43a2a;box-shadow:0 4px 12px rgba(228,75,58,0.3)}
+
+.message{margin-top:12px;padding:12px;border-radius:6px;color:var(--text-primary);font-size:14px;animation:slideIn 0.3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+
+.search-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-input,.filter-select{flex:1;min-width:180px;padding:11px;border:1px solid var(--border);border-radius:6px;font-size:14px;background:var(--card);color:var(--text-primary)}
+
+.table-wrapper{overflow-x:auto;border-radius:8px;border:1px solid var(--border)}
+.emp-table{width:100%;border-collapse:collapse;font-size:13px}
+.emp-table thead{background:linear-gradient(135deg, var(--accent-light) 0%, rgba(139,92,246,0.1) 100%);position:sticky;top:0}
+.emp-table th{padding:12px;text-align:left;font-weight:600;color:var(--accent);border-bottom:2px solid var(--border)}
+.emp-table td{padding:12px;border-bottom:1px solid var(--border)}
+.emp-table tbody tr{transition:background 0.2s}
+.emp-table tbody tr:hover{background:var(--accent-light)}
+.emp-table .actions{display:flex;gap:6px}
+.emp-table .edit-icon,.emp-table .delete-icon{cursor:pointer;padding:4px 8px;border-radius:4px;font-size:12px;transition:0.2s}
+.emp-table .edit-icon{color:var(--accent)}
+.emp-table .edit-icon:hover{background:rgba(43,120,228,0.2)}
+.emp-table .delete-icon{color:var(--danger)}
+.emp-table .delete-icon:hover{background:rgba(228,75,58,0.2)}
+.no-data{text-align:center;color:var(--muted);padding:32px!important}
+
+/* Department Chart */
+.dept-chart{display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:12px}
+.dept-bar{background:linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);padding:12px;border-radius:6px;color:#fff;text-align:center}
+.dept-bar-name{font-weight:600;margin-bottom:6px}
+.dept-bar-count{font-size:18px;font-weight:bold}
+.dept-bar-pct{font-size:11px;opacity:0.8}
+
+.footer{text-align:center;margin:30px 16px 20px;color:var(--muted);font-size:13px;padding-top:16px;border-top:1px solid var(--border)}
+
+/* Responsive */
+@media (max-width:768px){
+  .grid-2{grid-template-columns:1fr}
+  .header h1{font-size:22px}
+  .buttons{flex-direction:column}
+  .search-bar{flex-direction:column}
+  .search-input,.filter-select{width:100%}
+  .emp-table{font-size:12px}
+  .emp-table th,.emp-table td{padding:8px}
+  .dashboard{grid-template-columns:1fr 1fr}
+  .stat-card{padding:16px}
+  .stat-icon{font-size:24px}
+  .stat-info h3{font-size:20px}
+}

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Employee Management - JsonPowerDB</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- JPDB helper (local) -->
+  <script src="jpdb-commons.js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <!-- Header with theme toggle -->
+  <header class="header">
+    <div class="header-content">
+      <h1>📊 Employee Management System</h1>
+      <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Dashboard Stats -->
+    <section class="dashboard">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <h3 id="totalEmps">0</h3>
+          <p>Total Employees</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <div class="stat-info">
+          <h3 id="totalSalary">$0</h3>
+          <p>Total Payroll</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-info">
+          <h3 id="avgSalary">$0</h3>
+          <p>Average Salary</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏢</div>
+        <div class="stat-info">
+          <h3 id="totalDepts">0</h3>
+          <p>Departments</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="card">
+      <h2>👤 Employee Details</h2>
+      <form id="empForm" autocomplete="off">
+        <div class="grid-2">
+          <div class="row">
+            <label for="empId">Employee ID *</label>
+            <input type="text" id="empId" name="empId" placeholder="E001" required>
+          </div>
+
+          <div class="row">
+            <label for="empName">Name *</label>
+            <input type="text" id="empName" name="empName" placeholder="John Doe" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="row">
+            <label for="empEmail">Email *</label>
+            <input type="email" id="empEmail" name="empEmail" placeholder="john@example.com" required>
+          </div>
+
+          <div class="row">
+            <label for="empPhone">Phone</label>
+            <input type="text" id="empPhone" name="empPhone" placeholder="+1-234-567-8900">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="row">
+            <label for="empSalary">Salary *</label>
+            <input type="text" id="empSalary" name="empSalary" placeholder="50000" required>
+          </div>
+
+          <div class="row">
+            <label for="empDept">Department</label>
+            <select id="empDept" name="empDept">
+              <option value="">Select Department</option>
+              <option value="IT">IT</option>
+              <option value="HR">HR</option>
+              <option value="Finance">Finance</option>
+              <option value="Sales">Sales</option>
+              <option value="Operations">Operations</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Legal">Legal</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="row">
+            <label for="empDesignation">Designation</label>
+            <input type="text" id="empDesignation" name="empDesignation" placeholder="Software Engineer">
+          </div>
+
+          <div class="row">
+            <label for="empStatus">Employment Status</label>
+            <select id="empStatus" name="empStatus">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+              <option value="On Leave">On Leave</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button type="button" id="saveBtn" class="btn primary">💾 Save</button>
+          <button type="button" id="updateBtn" class="btn">✏️ Update</button>
+          <button type="button" id="deleteBtn" class="btn danger">🗑️ Delete</button>
+          <button type="button" id="resetBtn" class="btn">↻ Reset</button>
+          <button type="button" id="exportBtn" class="btn secondary">📥 Export CSV</button>
+        </div>
+
+        <div id="msg" class="message" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- Advanced Filters -->
+    <section class="card">
+      <h2>🔍 Search & Filters</h2>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="🔍 Search by ID, name, or email..." class="search-input">
+        <select id="deptFilter" class="filter-select">
+          <option value="">All Departments</option>
+          <option value="IT">IT</option>
+          <option value="HR">HR</option>
+          <option value="Finance">Finance</option>
+          <option value="Sales">Sales</option>
+          <option value="Operations">Operations</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Legal">Legal</option>
+        </select>
+        <button id="loadAllBtn" class="btn primary">📋 Load All</button>
+        <button id="sortBtn" class="btn secondary">⬍ Sort by Name</button>
+        <button id="clearFiltersBtn" class="btn">✕ Clear All</button>
+      </div>
+      <div id="tableContainer" class="table-wrapper">
+        <table id="empTable" class="emp-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Department</th>
+              <th>Designation</th>
+              <th>Salary</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="empTableBody">
+            <tr><td colspan="9" class="no-data">No records loaded. Click "Load All" to fetch.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Department Distribution Chart -->
+    <section class="card">
+      <h2>📈 Department Distribution</h2>
+      <div id="deptChart" class="dept-chart"></div>
+    </section>
+  </main>
+
+  <footer class="footer">🎓 Student Mini-Project — JsonPowerDB CRUD Demo</footer>
+</body>
+</html>
